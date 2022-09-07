@@ -1,12 +1,12 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useQuery } from "react-query";
-import { popularApi } from "../../../apis/movieApi";
+import { upcomingApi } from "../../../apis/movieApi";
 import { ListResponse, MovieDetail } from "../../../types";
-const usePopularMovie = () => {
+const useUpcomingMovie = () => {
   return useQuery<AxiosResponse<ListResponse<MovieDetail>>, AxiosError>(
-    "popularMovie",
-    popularApi
+    "upcomingMovie",
+    upcomingApi
   );
 };
 
-export default usePopularMovie;
+export default useUpcomingMovie;

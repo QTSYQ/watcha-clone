@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import Card from "../../../components/Card";
-import usePopularMovie from "./usePopularMovie";
+import useTopRateMovie from "./useTopRateMovie";
 import Slider from "../../../components/Slider";
 const Base = styled.div`
   margin-bottom: 42px;
@@ -14,12 +14,12 @@ const Title = styled.h4`
   padding: 12px 0 14px;
 `;
 
-export default function PopularSection() {
-  const { data, isLoading } = usePopularMovie();
+export default function TopRateSection() {
+  const { data, isLoading } = useTopRateMovie();
   const getYear = (date: string) => date.split("-")[0];
   return (
     <Base>
-      <Title>인기 상영작</Title>
+      <Title>최고 평점작</Title>
       {isLoading ? (
         <div>Loading...</div>
       ) : (
