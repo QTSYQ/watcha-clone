@@ -134,7 +134,7 @@ export default function Header() {
                 <Link href="/">
                   <MenuButton>영화</MenuButton>
                 </Link>
-                <Link href="/">
+                <Link href="/tv">
                   <MenuButton>TV 프로그램</MenuButton>
                 </Link>
               </Menu>
