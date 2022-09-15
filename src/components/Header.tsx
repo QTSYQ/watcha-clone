@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { AiOutlineSearch } from "react-icons/ai";
+import useMovieSearch from "../feartures/movie/useMovieSearch";
 const Base = styled.header`
   position: fixed;
   top: 0;
@@ -22,7 +23,6 @@ const MenuList = styled.ul`
   padding: 0;
   margin: 0;
   display: flex;
-  overflow: hidden;
 `;
 const Menu = styled.li`
   display: flex;
@@ -113,8 +113,50 @@ const SignUp = styled.button`
   margin: 15px 0;
 `;
 
+const SearchResultWrapper = styled.div`
+  position: absolute;
+  top: 60px;
+  left: 0;
+  z-index: 99999999990;
+  background: #fff;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 480px;
+  overflow-y: scroll;
+`;
+const SearchResultList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+const SearchResultListItem = styled.li`
+  padding: 4px 6px;
+  box-sizing: border-box;
+  color: #222;
+  font-size: 16px;
+  width: 100%;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  &:hover {
+    background-color: #ecf0f1;
+  }
+`;
+
 export default function Header() {
-  const handleKeyword = () => {};
+  const [searchKeyword, setSearchKeyword] = useState<string>("");
+
+  const handleKeyword = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearchKeyword(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const { data: searchResult } = useMovieSearch(searchKeyword);
 
   return (
     <>
@@ -152,6 +194,17 @@ export default function Header() {
                     </SearchForm>
                   </SearchFormWrapper>
                 </SearchContainer>
+                <SearchResultWrapper>
+                  <SearchResultList>
+                    {searchResult?.data.results.map((items) => (
+                      <Link key={items.id} href={`/movie/${items.id}`}>
+                        <SearchResultListItem>
+                          {items.title}
+                        </SearchResultListItem>
+                      </Link>
+                    ))}
+                  </SearchResultList>
+                </SearchResultWrapper>
               </SearchMenu>
               <Menu>
                 <SignIn>로그인</SignIn>
