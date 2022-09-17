@@ -8,6 +8,8 @@ import { AiOutlinePlayCircle, AiFillEye, AiOutlinePlus } from "react-icons/ai";
 import { FaPen } from "react-icons/fa";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { Rating } from "@mui/material";
+import DefaultInfo from "../feartures/movie/detail/DefaultInfo";
+import Similar from "../feartures/movie/detail/Similar";
 
 const Base = styled.div`
   position: relative;
@@ -273,7 +275,16 @@ function MovieDetail() {
               </Main>
             </TopInfo>
             <BottomInfo>
-              <ContentSectionContainer></ContentSectionContainer>
+              <ContentSectionContainer>
+                <DefaultInfo
+                  title={data.data.title}
+                  year={year}
+                  genres={genres}
+                  runtime={data.data.runtime}
+                  overview={data.data.overview}
+                />
+                <Similar id={id}></Similar>
+              </ContentSectionContainer>
             </BottomInfo>
           </>
         )}
